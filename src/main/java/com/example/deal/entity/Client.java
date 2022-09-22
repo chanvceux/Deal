@@ -7,13 +7,11 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-
+@Data
 public class Client {
 
     @Id
@@ -21,41 +19,42 @@ public class Client {
     Long id;
 
     @Column
-    String last_name;
+    private String last_name;
 
     @Column
-    String first_name;
+    private String first_name;
 
     @Column
-    LocalDate birth_date;
+    private LocalDate birth_date;
 
     @Column
-    String email;
+    private String email;
 
     @Column
-    Gender gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column
-    MaritalStatus maritalStatus;
+    @Enumerated(EnumType.STRING)
+    private MaritalStatus maritalStatus;
 
     @Column
-    Integer dependentAmount;
+    private Integer dependentAmount;
 
     @OneToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "passport_id")
-    Passport passport;
-
+    private Passport passport;
 
     @OneToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "employment_id")
-    Employment employment; // todo
+    private Employment employment; // todo
 
-    String account;
-
+    @Column
+    private String account;
 
     @OneToOne(cascade = {CascadeType.ALL}, optional = false, mappedBy = "client")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    public Application application;
+    private Application application;
 
 }

@@ -1,29 +1,41 @@
 package com.example.deal.entity;
 
-import com.example.deal.enumeration.ApplicationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Data
-public class ApplicationStatusHistory {
+public class PaymentSchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private ApplicationStatus status;
+    private Integer number;
 
     @Column
-    private LocalDateTime time;
+    private LocalDate date;
+
+    @Column
+    private BigDecimal totalPayment;
+
+    @Column
+    private BigDecimal interestPayment;
+
+    @Column
+    private BigDecimal debtPayment;
+
+    @Column
+    private BigDecimal remainingDebt;
+
 }

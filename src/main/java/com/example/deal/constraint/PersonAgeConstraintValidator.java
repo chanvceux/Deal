@@ -1,6 +1,6 @@
 package com.example.deal.constraint;
 
-import com.neoflex.conveyor.service.ConveyorService;
+import com.example.deal.service.DealService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -10,6 +10,6 @@ public class PersonAgeConstraintValidator implements ConstraintValidator <Person
 
     @Override
     public boolean isValid(LocalDate birthDate, ConstraintValidatorContext constraintValidatorContext) {
-        return ConveyorService.calculateAge(birthDate) >= 18;
+        return DealService.calculateAge(birthDate) >= 18;
     }
 }

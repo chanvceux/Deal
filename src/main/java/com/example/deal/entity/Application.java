@@ -1,26 +1,52 @@
 package com.example.deal.entity;
 
 import com.example.deal.enumeration.ApplicationStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
+@Data
 public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL}, optional = false)
     @JoinColumn(name = "client_id")
-    Client client;
-    Credit credit;
-    ApplicationStatus applicationStatus;
-    LocalDate creation_date;
-    //appliedOffer;
-    LocalDate sign_date;
-    String ses_code;
-    ApplicationStatusHistory statusHistory;
+    private Client client;
+
+    @OneToOne
+    @JoinColumn(name = "credit_id")
+    private Credit credit;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private ApplicationStatus applicationStatus;
+
+    @Column
+    private LocalDate creation_date;
+
+    @Column
+    private String appliedOffer;
+
+    @Column
+    private LocalDate sign_date;
+
+    @Column
+    private String ses_code;
+
+    @OneToMany (cascade = {CascadeType.ALL})
+    @JoinColumn(name = "statusHistory_id")
+    private List<ApplicationStatusHistory> statusHistory;
 
 }

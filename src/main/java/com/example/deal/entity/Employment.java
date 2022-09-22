@@ -2,23 +2,42 @@ package com.example.deal.entity;
 
 import com.example.deal.enumeration.EmploymentStatus;
 import com.example.deal.enumeration.Position;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
+@Data
 public class Employment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    EmploymentStatus employmentStatus;
-    String employer;
-    BigDecimal salary;
-    Position position;
-    Integer work_experience_total;
-    Integer Work_experience_current;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private EmploymentStatus employmentStatus;
+
+    @Column
+    private String employer;
+
+    @Column
+    private BigDecimal salary;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Position position;
+
+    @Column
+    private Integer work_experience_total;
+
+    @Column
+    private Integer Work_experience_current;
 }

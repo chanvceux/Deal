@@ -1,22 +1,35 @@
 package com.example.deal.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
+@Data
 public class Passport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String series;
-    String number;
-    LocalDate issue_date;
-    String issue_branch;
+    @Column
+    private String series;
+
+    @Column
+    private String number;
+
+    @Column
+    private LocalDate issue_date;
+
+    @Column
+    private String issue_branch;
 
 }
