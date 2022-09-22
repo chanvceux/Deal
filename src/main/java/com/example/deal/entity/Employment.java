@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Data
+
+@Table(name = "employment")
 public class Employment {
 
     @Id

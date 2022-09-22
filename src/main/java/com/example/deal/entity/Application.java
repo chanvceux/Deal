@@ -15,6 +15,8 @@ import java.util.List;
 @Builder
 @Entity
 @Data
+
+@Table(name = "application")
 public class Application {
 
     @Id

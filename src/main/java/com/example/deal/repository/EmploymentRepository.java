@@ -1,4 +1,7 @@
 package com.example.deal.repository;
 
-public interface EmploymentRepository {
+import com.example.deal.entity.Employment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmploymentRepository extends JpaRepository<Employment, Long> {
 }

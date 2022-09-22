@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Data
+
+@Table(name = "paymentSchedule")
 public class PaymentSchedule {
 
     @Id

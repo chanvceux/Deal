@@ -13,6 +13,8 @@ import java.util.List;
 @Builder
 @Entity
 @Data
+
+@Table(name = "credit")
 public class Credit {
 
     @Id
