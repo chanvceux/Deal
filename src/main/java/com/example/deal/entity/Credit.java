@@ -40,8 +40,10 @@ public class Credit {
     @Enumerated(EnumType.STRING)
     private CreditStatus creditStatus;
 
-//    Boolean isInsuranceEnabled; // todo
-//    Boolean isSalaryClient; // todo
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "optionalServices_id", unique = true, updatable = false)
+    private OptionalServices optionalServices;
+
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "paymentSchedule_id")

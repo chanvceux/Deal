@@ -1,9 +1,6 @@
 package com.example.deal.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,5 +15,16 @@ public class OptionalServices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private Boolean isInsuranceEnabled;
+
+    @Column
+    private Boolean isSalaryClient;
+
+    @OneToOne(cascade = {CascadeType.ALL}, optional = false, mappedBy = "optionalServices")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    public Credit credit;
 
 }
