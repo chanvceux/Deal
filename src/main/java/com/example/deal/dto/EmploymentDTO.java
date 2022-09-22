@@ -1,7 +1,7 @@
 package com.example.deal.dto;
 
-import com.neoflex.conveyor.enumeration.EmploymentStatus;
-import com.neoflex.conveyor.enumeration.Position;
+import com.example.deal.enumeration.EmploymentStatus;
+import com.example.deal.enumeration.Position;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
