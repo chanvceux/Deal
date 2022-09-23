@@ -41,5 +41,5 @@ public class Employment {
     private Integer work_experience_total;
 
     @Column
-    private Integer Work_experience_current;
+    private Integer work_experience_current;
 }
