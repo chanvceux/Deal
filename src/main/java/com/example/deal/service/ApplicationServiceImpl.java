@@ -5,6 +5,7 @@ import com.example.deal.enumeration.ApplicationStatus;
 import com.example.deal.enumeration.CreditStatus;
 import com.example.deal.repository.ApplicationRepository;
 import com.example.deal.repository.ApplicationStatusHistoryRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
