@@ -2,6 +2,7 @@ package com.example.deal.enumeration;
 
 public enum ApplicationStatus {
     PREAPPROVAL,
+    CALCULATED,
     APPROVED,
     CC_DENIED,
     CC_APPROVED,

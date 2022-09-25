@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class LoanApplicationRequestDTO {
+    Long application_id;
 
     @NotNull
     @DecimalMin("10000")
@@ -56,7 +56,6 @@ public class LoanApplicationRequestDTO {
 
     @NotBlank
     @Length(min = 6, max = 6)
-
     @Pattern(regexp = "^[0-9]+$")
     String passportNumber;
 

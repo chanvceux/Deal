@@ -2,10 +2,7 @@ package com.example.deal.entity;
 
 import com.example.deal.enumeration.EmploymentStatus;
 import com.example.deal.enumeration.Position;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +12,6 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Data
-
 @Table(name = "employment")
 public class Employment {
 
@@ -42,4 +38,9 @@ public class Employment {
 
     @Column
     private Integer work_experience_current;
+
+    @OneToOne(cascade = {CascadeType.ALL}, optional = false, mappedBy = "employment")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    public Client client;
 }

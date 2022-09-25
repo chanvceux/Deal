@@ -11,9 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @Data
 @AllArgsConstructor
-
 public class EmploymentDTO {
-
     EmploymentStatus employmentStatus;
     String employerINN;
     BigDecimal salary;

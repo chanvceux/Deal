@@ -7,3 +7,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+server:
+  port: 8081
+
+conveyor:
+  url: http://localhost:8080

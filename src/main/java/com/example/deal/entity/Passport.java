@@ -1,6 +1,5 @@
 package com.example.deal.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Data
-
 @Table(name = "passport")
 public class Passport {
 

@@ -10,9 +10,7 @@ import java.time.LocalDate;
 @Builder
 @Data
 @AllArgsConstructor
-
 public class PaymentScheduleElementDTO {
-
     Integer number;
     LocalDate date;
     BigDecimal totalPayment;

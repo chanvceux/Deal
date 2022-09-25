@@ -12,9 +12,7 @@ import java.time.LocalDate;
 @Builder
 @Data
 @AllArgsConstructor
-
 public class ScoringDataDTO {
-
     BigDecimal amount;
     Integer term;
     String firstName;

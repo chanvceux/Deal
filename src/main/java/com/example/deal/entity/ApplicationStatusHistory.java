@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Data
-
 @Table(name = "applicationStatusHistory")
 public class ApplicationStatusHistory {
 
@@ -28,4 +27,7 @@ public class ApplicationStatusHistory {
 
     @Column
     private LocalDateTime time;
+
+
+
 }

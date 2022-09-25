@@ -1,21 +1,16 @@
 package com.example.deal.entity;
-
 import com.example.deal.enumeration.ApplicationStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Data
-
 @Table(name = "application")
 public class Application {
 
@@ -24,11 +19,11 @@ public class Application {
     private Long id;
 
     @OneToOne(cascade = {CascadeType.ALL}, optional = false)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", unique = true)
     private Client client;
 
-    @OneToOne
-    @JoinColumn(name = "credit_id")
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "credit_id", unique = true)
     private Credit credit;
 
     @Column
@@ -42,13 +37,13 @@ public class Application {
     private String appliedOffer;
 
     @Column
-    private LocalDate sign_date;
+    private LocalDate signDate;
 
     @Column
-    private String ses_code;
+    private String sesCode;
 
-    @OneToMany (cascade = {CascadeType.ALL})
-    @JoinColumn(name = "statusHistory_id")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "application_id")
     private List<ApplicationStatusHistory> statusHistory;
 
 }

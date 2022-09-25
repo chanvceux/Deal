@@ -9,9 +9,7 @@ import java.math.BigDecimal;
 @Builder
 @Data
 @AllArgsConstructor
-
 public class LoanOfferDTO {
-
     Long applicationId;
     BigDecimal requestedAmount;
     BigDecimal totalAmount;

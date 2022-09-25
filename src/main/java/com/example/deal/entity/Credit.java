@@ -1,6 +1,5 @@
 package com.example.deal.entity;
 
-import com.example.deal.dto.PaymentScheduleElementDTO;
 import com.example.deal.enumeration.CreditStatus;
 import lombok.*;
 
@@ -13,7 +12,6 @@ import java.util.List;
 @Builder
 @Entity
 @Data
-
 @Table(name = "credit")
 public class Credit {
 
