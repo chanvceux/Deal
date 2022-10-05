@@ -1,6 +1,5 @@
 package com.example.deal.service;
 import com.example.deal.dto.CreditDTO;
-import com.example.deal.dto.ScoringDataDTO;
 import com.example.deal.entity.PaymentSchedule;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CreditServiceImpl implements CreditService {
-
     private final ApplicationServiceImpl applicationServiceImpl;
     private final PaymentScheduleServiceImpl paymentScheduleImpl;
 

@@ -27,9 +27,9 @@ public class Passport {
     private String number;
 
     @Column
-    private LocalDate issue_date;
+    private LocalDate issueDate;
 
     @Column
-    private String issue_branch;
+    private String issueBranch;
 
 }

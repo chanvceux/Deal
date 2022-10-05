@@ -20,13 +20,13 @@ public class Client {
     private Long id;
 
     @Column
-    private String last_name;
+    private String lastName;
 
     @Column
-    private String first_name;
+    private String firstName;
 
     @Column
-    private String middle_name;
+    private String middleName;
 
     @Column
     private LocalDate birthdate;

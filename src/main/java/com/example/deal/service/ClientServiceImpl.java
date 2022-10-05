@@ -9,14 +9,17 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class ClientServiceImpl implements ClientService {
+    private final PassportServiceImpl passportService;
     @Autowired
-    PassportServiceImpl passportService;
+    public ClientServiceImpl(PassportServiceImpl passportService) {
+        this.passportService = passportService;
+    }
 
     public Client clientBuilder(LoanApplicationRequestDTO loanApplicationRequestDTO) {
         Client client = Client.builder()
-                .first_name(loanApplicationRequestDTO.getFirstName())
-                .middle_name(loanApplicationRequestDTO.getMiddleName())
-                .last_name(loanApplicationRequestDTO.getLastName())
+                .firstName(loanApplicationRequestDTO.getFirstName())
+                .middleName(loanApplicationRequestDTO.getMiddleName())
+                .lastName(loanApplicationRequestDTO.getLastName())
                 .email(loanApplicationRequestDTO.getEmail())
                 .birthdate(loanApplicationRequestDTO.getBirthdate())
                 .passport(passportService.passportBuilder(loanApplicationRequestDTO))

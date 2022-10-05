@@ -1,6 +1,7 @@
 package com.example.deal.controller;
 
 import com.example.deal.dto.*;
+import com.example.deal.facade.Fasade;
 import com.example.deal.service.ApplicationServiceImpl;
 import com.example.deal.service.CreditServiceImpl;
 import com.example.deal.service.DealServiceImpl;
@@ -19,18 +20,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/deal")
 public class DealController {
+    private final DealServiceImpl dealService;
+    private final CreditServiceImpl creditService;
+    private final ApplicationServiceImpl applicationService;
+    private final Fasade fasade;
+
     @Autowired
-    DealServiceImpl dealService;
-    @Autowired
-    CreditServiceImpl creditService;
-    @Autowired
-    ApplicationServiceImpl applicationService;
+    public DealController(DealServiceImpl dealService, CreditServiceImpl creditService, ApplicationServiceImpl applicationService, Fasade fasade) {
+        this.dealService = dealService;
+        this.creditService = creditService;
+        this.applicationService = applicationService;
+        this.fasade = fasade;
+    }
 
     @PostMapping("/application")
     @Operation(description = "Creating offers, interaction with method \"offers\" from Conveyor")
     public List<LoanOfferDTO> offersDeal(@Valid @RequestBody LoanApplicationRequestDTO loanApplicationRequestDTO) {
-        log.debug("GETTING LoanApplicationRequestDTO, VALUE: {}", loanApplicationRequestDTO);
-        loanApplicationRequestDTO.setApplication_id(applicationService.addApplication(loanApplicationRequestDTO));
+        fasade.offersDealFacade(loanApplicationRequestDTO);
         return dealService.offers(loanApplicationRequestDTO);
     }
 
@@ -45,11 +51,7 @@ public class DealController {
     @Operation(description = "Adding new information to the existed offer, interaction with " +
             "method \"calculation\" from Conveyor")
     public void calculate(@RequestBody FinishRegistrationRequestDTO finishRegistrationRequestDTO, @PathVariable Long applicationId) {
-        log.debug("GETTING FinishRegistrationRequestDTO, VALUE: {}", finishRegistrationRequestDTO);
-        log.debug("GETTING applicationId, VALUE: {}", applicationId);
-        ScoringDataDTO scoringDataDTO = applicationService.scoringDataDTOBuilder(applicationId, finishRegistrationRequestDTO);
-        CreditDTO creditDTO = dealService.calculation(scoringDataDTO);
-        creditService.updateCredit(creditDTO, applicationId);
+        creditService.updateCredit(fasade.calculateFacade(finishRegistrationRequestDTO, applicationId), applicationId);
     }
 
 

@@ -31,7 +31,7 @@ public class Application {
     private ApplicationStatus applicationStatus;
 
     @Column
-    private LocalDate creation_date;
+    private LocalDate creationDate;
 
     @Column
     private String appliedOffer;

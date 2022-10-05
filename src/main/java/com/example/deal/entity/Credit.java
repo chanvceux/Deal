@@ -45,7 +45,7 @@ public class Credit {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "paymentSchedule_id")
-    private List<PaymentSchedule> paymentSchedule; // todo
+    private List<PaymentSchedule> paymentSchedule;
 
     @OneToOne(cascade = {CascadeType.ALL}, optional = false, mappedBy = "credit")
     @ToString.Exclude

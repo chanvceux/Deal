@@ -34,10 +34,10 @@ public class Employment {
     private Position position;
 
     @Column
-    private Integer work_experience_total;
+    private Integer workExperienceTotal;
 
     @Column
-    private Integer work_experience_current;
+    private Integer workExperienceCurrent;
 
     @OneToOne(cascade = {CascadeType.ALL}, optional = false, mappedBy = "employment")
     @ToString.Exclude

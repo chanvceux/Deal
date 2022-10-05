@@ -6,11 +6,9 @@ import com.example.deal.enumeration.CreditStatus;
 import com.example.deal.repository.ApplicationRepository;
 import com.example.deal.repository.ApplicationStatusHistoryRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -18,12 +16,15 @@ import java.util.*;
 @Slf4j
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
+    private final ApplicationRepository applicationRepository;
+    private final ClientServiceImpl clientService;
+    private final ApplicationStatusHistoryRepository applicationStatusHistoryRepository;
     @Autowired
-    ApplicationRepository applicationRepository;
-    @Autowired
-    ClientServiceImpl clientService;
-    @Autowired
-    ApplicationStatusHistoryRepository applicationStatusHistoryRepository;
+    public ApplicationServiceImpl(ApplicationRepository applicationRepository, ClientServiceImpl clientService, ApplicationStatusHistoryRepository applicationStatusHistoryRepository) {
+        this.applicationRepository = applicationRepository;
+        this.clientService = clientService;
+        this.applicationStatusHistoryRepository = applicationStatusHistoryRepository;
+    }
 
     public Long addApplication(LoanApplicationRequestDTO loanApplicationRequestDTO) {
 
@@ -32,7 +33,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         Application application = Application.builder()
                 .client(clientService.clientBuilder(loanApplicationRequestDTO))
                 .applicationStatus(ApplicationStatus.PREAPPROVAL)
-                .creation_date(LocalDate.now())
+                .creationDate(LocalDate.now())
                 .statusHistory(List.of(applicationStatusHistoryBuilder(ApplicationStatus.PREAPPROVAL)))
                 .build();
 
@@ -102,8 +103,8 @@ public class ApplicationServiceImpl implements ApplicationService {
                 .employer(finishRegistrationRequestDTO.getEmployment().getEmployerINN())
                 .salary(finishRegistrationRequestDTO.getEmployment().getSalary())
                 .position(finishRegistrationRequestDTO.getEmployment().getPosition())
-                .work_experience_total(finishRegistrationRequestDTO.getEmployment().getWorkExperienceTotal())
-                .work_experience_current(finishRegistrationRequestDTO.getEmployment().getWorkExperienceCurrent())
+                .workExperienceTotal(finishRegistrationRequestDTO.getEmployment().getWorkExperienceTotal())
+                .workExperienceCurrent(finishRegistrationRequestDTO.getEmployment().getWorkExperienceCurrent())
                 .build();
 
         log.debug("RETURNING Employment, VALUE: {}", employment);
@@ -117,8 +118,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         Application application = getApplication(applicationId);
         application.getClient().setGender(finishRegistrationRequestDTO.getGender());
-        application.getClient().getPassport().setIssue_date(finishRegistrationRequestDTO.getPassportIssueDate());
-        application.getClient().getPassport().setIssue_branch(finishRegistrationRequestDTO.getPassportIssueBranch());
+        application.getClient().getPassport().setIssueDate(finishRegistrationRequestDTO.getPassportIssueDate());
+        application.getClient().getPassport().setIssueBranch(finishRegistrationRequestDTO.getPassportIssueBranch());
         application.getClient().setMaritalStatus(finishRegistrationRequestDTO.getMaritalStatus());
         application.getClient().setDependentAmount(finishRegistrationRequestDTO.getDependentAmount());
         application.getClient().setEmployment(employmentBuilder(finishRegistrationRequestDTO));
@@ -140,15 +141,15 @@ public class ApplicationServiceImpl implements ApplicationService {
         ScoringDataDTO scoringDataDTO = ScoringDataDTO.builder()
                 .amount(application.getCredit().getAmount())
                 .term(application.getCredit().getTerm())
-                .firstName(application.getClient().getFirst_name())
-                .middleName(application.getClient().getMiddle_name())
-                .lastName(application.getClient().getLast_name())
+                .firstName(application.getClient().getFirstName())
+                .middleName(application.getClient().getMiddleName())
+                .lastName(application.getClient().getLastName())
                 .gender(application.getClient().getGender())
                 .birthdate(application.getClient().getBirthdate())
                 .passportSeries(application.getClient().getPassport().getSeries())
                 .passportNumber(application.getClient().getPassport().getNumber())
-                .passportIssueBranch(application.getClient().getPassport().getIssue_branch())
-                .passportIssueDate(application.getClient().getPassport().getIssue_date())
+                .passportIssueBranch(application.getClient().getPassport().getIssueBranch())
+                .passportIssueDate(application.getClient().getPassport().getIssueDate())
                 .maritalStatus(application.getClient().getMaritalStatus())
                 .dependentAmount(application.getClient().getDependentAmount())
                 .employment(finishRegistrationRequestDTO.getEmployment())
@@ -183,7 +184,6 @@ public class ApplicationServiceImpl implements ApplicationService {
         log.debug("UPDATING Application, VALUE: {}", application);
     }
 
-    @Transactional
     public void updateApplicationStatusHistory(Application application, ApplicationStatus applicationStatus) {
 
         log.debug("GETTING Application, VALUE: {}", application);
