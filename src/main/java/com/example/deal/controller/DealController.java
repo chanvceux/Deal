@@ -1,7 +1,7 @@
 package com.example.deal.controller;
 
 import com.example.deal.dto.*;
-import com.example.deal.facade.Fasade;
+import com.example.deal.facade.Facade;
 import com.example.deal.service.ApplicationServiceImpl;
 import com.example.deal.service.CreditServiceImpl;
 import com.example.deal.service.DealServiceImpl;
@@ -23,20 +23,20 @@ public class DealController {
     private final DealServiceImpl dealService;
     private final CreditServiceImpl creditService;
     private final ApplicationServiceImpl applicationService;
-    private final Fasade fasade;
+    private final Facade facade;
 
     @Autowired
-    public DealController(DealServiceImpl dealService, CreditServiceImpl creditService, ApplicationServiceImpl applicationService, Fasade fasade) {
+    public DealController(DealServiceImpl dealService, CreditServiceImpl creditService, ApplicationServiceImpl applicationService, Facade facade) {
         this.dealService = dealService;
         this.creditService = creditService;
         this.applicationService = applicationService;
-        this.fasade = fasade;
+        this.facade = facade;
     }
 
     @PostMapping("/application")
     @Operation(description = "Creating offers, interaction with method \"offers\" from Conveyor")
     public List<LoanOfferDTO> offersDeal(@Valid @RequestBody LoanApplicationRequestDTO loanApplicationRequestDTO) {
-        fasade.offersDealFacade(loanApplicationRequestDTO);
+        facade.offersDealFacade(loanApplicationRequestDTO);
         return dealService.offers(loanApplicationRequestDTO);
     }
 
@@ -51,7 +51,7 @@ public class DealController {
     @Operation(description = "Adding new information to the existed offer, interaction with " +
             "method \"calculation\" from Conveyor")
     public void calculate(@RequestBody FinishRegistrationRequestDTO finishRegistrationRequestDTO, @PathVariable Long applicationId) {
-        creditService.updateCredit(fasade.calculateFacade(finishRegistrationRequestDTO, applicationId), applicationId);
+        creditService.updateCredit(facade.calculateFacade(finishRegistrationRequestDTO, applicationId), applicationId);
     }
 
 

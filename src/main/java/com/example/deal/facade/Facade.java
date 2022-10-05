@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class Fasade {
+public class Facade {
 
     private final ApplicationServiceImpl applicationService;
     private final DealServiceImpl dealService;
 
     @Autowired
-    public Fasade(ApplicationServiceImpl applicationService, DealServiceImpl dealService) {
+    public Facade(ApplicationServiceImpl applicationService, DealServiceImpl dealService) {
         this.applicationService = applicationService;
         this.dealService = dealService;
     }
