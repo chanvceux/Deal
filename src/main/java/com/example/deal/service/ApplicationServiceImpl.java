@@ -2,7 +2,7 @@ package com.example.deal.service;
 import com.example.deal.dto.*;
 import com.example.deal.entity.*;
 import com.example.deal.enumeration.ApplicationStatus;
-import com.example.deal.enumeration.CreditStatus;
+import com.example.deal.mapper.*;
 import com.example.deal.repository.ApplicationRepository;
 import com.example.deal.repository.ApplicationStatusHistoryRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -10,32 +10,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Slf4j
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationRepository applicationRepository;
-    private final ClientServiceImpl clientService;
     private final ApplicationStatusHistoryRepository applicationStatusHistoryRepository;
     @Autowired
-    public ApplicationServiceImpl(ApplicationRepository applicationRepository, ClientServiceImpl clientService, ApplicationStatusHistoryRepository applicationStatusHistoryRepository) {
+    public ApplicationServiceImpl(ApplicationRepository applicationRepository, ApplicationStatusHistoryRepository applicationStatusHistoryRepository) {
         this.applicationRepository = applicationRepository;
-        this.clientService = clientService;
         this.applicationStatusHistoryRepository = applicationStatusHistoryRepository;
     }
 
     public Long addApplication(LoanApplicationRequestDTO loanApplicationRequestDTO) {
 
         log.debug("GETTING LoanApplicationRequestDTO, INPUT VALUES: {}", loanApplicationRequestDTO);
-
-        Application application = Application.builder()
-                .client(clientService.clientBuilder(loanApplicationRequestDTO))
-                .applicationStatus(ApplicationStatus.PREAPPROVAL)
-                .creationDate(LocalDate.now())
-                .statusHistory(List.of(applicationStatusHistoryBuilder(ApplicationStatus.PREAPPROVAL)))
-                .build();
+        Application application = ApplicationMapper.applicationBuilder(loanApplicationRequestDTO, ApplicationStatus.PREAPPROVAL);
 
         log.debug("BUILDING application, VALUE: {}", application);
         applicationRepository.save(application);
@@ -44,40 +35,11 @@ public class ApplicationServiceImpl implements ApplicationService {
         return application.getId();
     }
 
-    private Credit creditBuilder(LoanOfferDTO loanOfferDTO) {
-
-        log.debug("GETTING loanOfferDTO, INPUT VALUES: {}", loanOfferDTO);
-        Credit credit = Credit.builder()
-                .amount(loanOfferDTO.getRequestedAmount())
-                .term(loanOfferDTO.getTerm())
-                .monthlyPayment(loanOfferDTO.getMonthlyPayment())
-                .rate(loanOfferDTO.getRate())
-                .psk(loanOfferDTO.getTotalAmount())
-                .optionalServices(optionalServicesBuilder(loanOfferDTO))
-                .creditStatus(CreditStatus.CALCULATED)
-                .build();
-        log.debug("RETURNING Credit, VALUE: {}", credit);
-
-        return credit;
-    }
-
-    private OptionalServices optionalServicesBuilder(LoanOfferDTO loanOfferDTO) {
-
-        log.debug("GETTING loanOfferDTO, INPUT VALUES: {}", loanOfferDTO);
-        OptionalServices optionalServices = OptionalServices.builder()
-                .isInsuranceEnabled(loanOfferDTO.getIsInsuranceEnabled())
-                .isSalaryClient(loanOfferDTO.getIsSalaryClient())
-                .build();
-        log.debug("RETURNING OptionalServices, VALUE: {}", optionalServices);
-
-        return optionalServices;
-    }
-
     public void saveApplicationOffer(LoanOfferDTO loanOfferDTO) {
 
         log.debug("GETTING loanOfferDTO, INPUT VALUES: {}", loanOfferDTO);
         Application application = getApplication(loanOfferDTO.getApplicationId());
-        application.setCredit(creditBuilder(loanOfferDTO));
+        application.setCredit(CreditMapper.creditBuilder(loanOfferDTO));
         application.setSignDate(LocalDate.now());
         application.setAppliedOffer(loanOfferDTO.toString());
         application.setApplicationStatus(ApplicationStatus.CALCULATED);
@@ -94,23 +56,6 @@ public class ApplicationServiceImpl implements ApplicationService {
                 new NoSuchElementException("Cannot find an application with this ID"));
     }
 
-    private Employment employmentBuilder(FinishRegistrationRequestDTO finishRegistrationRequestDTO) {
-
-        log.debug("GETTING FinishRegistrationRequestDTO, VALUE: {}", finishRegistrationRequestDTO);
-
-        Employment employment = Employment.builder()
-                .employmentStatus(finishRegistrationRequestDTO.getEmployment().getEmploymentStatus())
-                .employer(finishRegistrationRequestDTO.getEmployment().getEmployerINN())
-                .salary(finishRegistrationRequestDTO.getEmployment().getSalary())
-                .position(finishRegistrationRequestDTO.getEmployment().getPosition())
-                .workExperienceTotal(finishRegistrationRequestDTO.getEmployment().getWorkExperienceTotal())
-                .workExperienceCurrent(finishRegistrationRequestDTO.getEmployment().getWorkExperienceCurrent())
-                .build();
-
-        log.debug("RETURNING Employment, VALUE: {}", employment);
-        return employment;
-    }
-
     public Application updateApplicationStatusHistory(Long applicationId, FinishRegistrationRequestDTO finishRegistrationRequestDTO) {
 
         log.debug("GETTING applicationId, VALUE: {}", applicationId);
@@ -122,7 +67,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         application.getClient().getPassport().setIssueBranch(finishRegistrationRequestDTO.getPassportIssueBranch());
         application.getClient().setMaritalStatus(finishRegistrationRequestDTO.getMaritalStatus());
         application.getClient().setDependentAmount(finishRegistrationRequestDTO.getDependentAmount());
-        application.getClient().setEmployment(employmentBuilder(finishRegistrationRequestDTO));
+        application.getClient().setEmployment(EmploymentMapper.employmentBuilder(finishRegistrationRequestDTO));
         application.getClient().setAccount(finishRegistrationRequestDTO.getAccount());
         applicationRepository.save(application);
 
@@ -138,25 +83,8 @@ public class ApplicationServiceImpl implements ApplicationService {
         Application application = updateApplicationStatusHistory(applicationId, finishRegistrationRequestDTO);
         log.debug("GETTING Application, UPDATING with updateApplicationStatusHistory, VALUE: {}", applicationId);
 
-        ScoringDataDTO scoringDataDTO = ScoringDataDTO.builder()
-                .amount(application.getCredit().getAmount())
-                .term(application.getCredit().getTerm())
-                .firstName(application.getClient().getFirstName())
-                .middleName(application.getClient().getMiddleName())
-                .lastName(application.getClient().getLastName())
-                .gender(application.getClient().getGender())
-                .birthdate(application.getClient().getBirthdate())
-                .passportSeries(application.getClient().getPassport().getSeries())
-                .passportNumber(application.getClient().getPassport().getNumber())
-                .passportIssueBranch(application.getClient().getPassport().getIssueBranch())
-                .passportIssueDate(application.getClient().getPassport().getIssueDate())
-                .maritalStatus(application.getClient().getMaritalStatus())
-                .dependentAmount(application.getClient().getDependentAmount())
-                .employment(finishRegistrationRequestDTO.getEmployment())
-                .account(application.getClient().getAccount())
-                .isInsuranceEnabled(application.getCredit().getOptionalServices().getIsInsuranceEnabled())
-                .isSalaryClient(application.getCredit().getOptionalServices().getIsSalaryClient())
-                .build();
+        ScoringDataDTO scoringDataDTO =
+                ScoringDataMapper.scoringDataBuilder(applicationId, finishRegistrationRequestDTO, application);
 
         log.debug("RETURNING ScoringDataDto, VALUE: {}", scoringDataDTO);
         return scoringDataDTO;
@@ -190,21 +118,17 @@ public class ApplicationServiceImpl implements ApplicationService {
         log.debug("GETTING ApplicationStatus, VALUE: {}", applicationStatus);
 
         List<ApplicationStatusHistory> list = new ArrayList<>();
-        list.add(applicationStatusHistoryBuilder(applicationStatus));
+        list.add(applicationStatusHistorySave(applicationStatus));
         application.getStatusHistory().add(list.get(0));
         applicationRepository.save(application);
 
         log.debug("SAVING Application, VALUE: {}", application);
     }
 
-    private ApplicationStatusHistory applicationStatusHistoryBuilder(ApplicationStatus applicationStatus) {
+    private ApplicationStatusHistory applicationStatusHistorySave(ApplicationStatus applicationStatus) {
 
         log.debug("GETTING ApplicationStatus, VALUE: {}", applicationStatus);
-
-        ApplicationStatusHistory applicationStatusHistory = applicationStatusHistoryRepository.save(ApplicationStatusHistory.builder()
-                .status(applicationStatus)
-                .time(LocalDateTime.now())
-                .build());
+        ApplicationStatusHistory applicationStatusHistory = applicationStatusHistoryRepository.save(ApplicationStatusHistoryMapper.applicationStatusHistoryBuilder(applicationStatus));
 
         log.debug("ADDING new application status to ApplicationStatusHistory, VALUE: {}", applicationStatusHistory);
         return applicationStatusHistory;
