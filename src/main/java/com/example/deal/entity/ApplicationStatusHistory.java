@@ -1,10 +1,7 @@
 package com.example.deal.entity;
 
 import com.example.deal.enumeration.ApplicationStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,7 +24,5 @@ public class ApplicationStatusHistory {
 
     @Column
     private LocalDateTime time;
-
-
 
 }

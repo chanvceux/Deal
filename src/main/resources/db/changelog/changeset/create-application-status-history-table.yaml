@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-application-status-history
+      author: Valentina Tevyants
+      changes:
+        - createTable:
+            tableName: application_status_history
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: time
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: application_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: application_fk
+                    nullable: true
+
+

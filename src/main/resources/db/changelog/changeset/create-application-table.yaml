@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-application
+      author: Valentina Tevyants
+      changes:
+        - createTable:
+            tableName: application
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: application_status
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: applied_offer
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: creation_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: ses_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: sign_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: client_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: client_fk
+                    nullable: true
+              - column:
+                  name: credit_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: credit_fk
+                    nullable: true
+
+

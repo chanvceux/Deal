@@ -14,3 +14,6 @@ server:
 
 conveyor:
   url: http://localhost:8080
+
+json:
+  application: ./src/test/resources/json/Application.json
