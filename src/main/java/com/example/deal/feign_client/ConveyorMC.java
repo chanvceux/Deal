@@ -1,4 +1,4 @@
-package com.example.deal.feignclient;
+package com.example.deal.feign_client;
 
 import com.example.deal.dto.CreditDTO;
 import com.example.deal.dto.LoanApplicationRequestDTO;

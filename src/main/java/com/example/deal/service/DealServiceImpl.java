@@ -4,7 +4,7 @@ import com.example.deal.dto.CreditDTO;
 import com.example.deal.dto.LoanApplicationRequestDTO;
 import com.example.deal.dto.LoanOfferDTO;
 import com.example.deal.dto.ScoringDataDTO;
-import com.example.deal.feignclient.ConveyorMC;
+import com.example.deal.feign_client.ConveyorMC;
 import com.example.deal.repository.ApplicationRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class DealServiceImpl implements DealService {
         return offers;
     }
 
-    public CreditDTO calculation (ScoringDataDTO scoringDataDTO) {
+    public CreditDTO calculation(ScoringDataDTO scoringDataDTO) {
         CreditDTO creditDTO = conveyorMC.calculation(scoringDataDTO);
         log.debug("RETURNING CreditDTO, VALUE: {}", creditDTO);
         return creditDTO;
