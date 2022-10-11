@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-passport
+      author: Valentina Tevyants
+      changes:
+        - createTable:
+            tableName: passport
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: issue_branch
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: issue_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: number
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: series
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+
