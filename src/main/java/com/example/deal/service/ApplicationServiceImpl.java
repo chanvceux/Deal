@@ -41,6 +41,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         Application application = getApplication(loanOfferDTO.getApplicationId());
         application.setCredit(CreditMapper.creditBuilder(loanOfferDTO));
         application.setSignDate(LocalDate.now());
+        application.setSesCode(ApplicationMapper.createSesCode().toString());
         application.setAppliedOffer(loanOfferDTO.toString());
         application.setApplicationStatus(ApplicationStatus.CALCULATED);
         updateApplicationStatusHistory(application, ApplicationStatus.CALCULATED);

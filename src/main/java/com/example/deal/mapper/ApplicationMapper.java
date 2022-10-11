@@ -20,4 +20,10 @@ public class ApplicationMapper {
             .statusHistory(List.of(ApplicationStatusHistoryMapper.applicationStatusHistoryBuilder(ApplicationStatus.PREAPPROVAL)))
             .build();
     }
+
+    public static Integer createSesCode() {
+        int min = 1000;
+        int max = 9999;
+        return (int) (Math.random()*++max + min);
+    }
 }
