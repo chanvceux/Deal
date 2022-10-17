@@ -1,7 +1,9 @@
 package com.example.deal.facade;
 
 import com.example.deal.dto.*;
+import com.example.deal.entity.Application;
 import com.example.deal.enumeration.Theme;
+import com.example.deal.mapper.ScoringDataMapper;
 import com.example.deal.service.ApplicationServiceImpl;
 import com.example.deal.service.DealServiceImpl;
 import com.example.deal.service.KafkaProducerServiceImpl;
@@ -31,7 +33,11 @@ public class Facade {
     public CreditDTO calculateFacade(FinishRegistrationRequestDTO finishRegistrationRequestDTO, Long applicationId) {
         log.debug("GETTING FinishRegistrationRequestDTO, VALUE: {}", finishRegistrationRequestDTO);
         log.debug("GETTING applicationId, VALUE: {}", applicationId);
-        ScoringDataDTO scoringDataDTO = applicationService.scoringDataDTOBuilder(applicationId, finishRegistrationRequestDTO);
+
+        Application application = applicationService.updateApplicationStatusHistory(applicationId, finishRegistrationRequestDTO);
+        log.debug("GETTING Application, UPDATING with updateApplicationStatusHistory, VALUE: {}", applicationId);
+
+        ScoringDataDTO scoringDataDTO = ScoringDataMapper.scoringDataBuilder(applicationId, finishRegistrationRequestDTO, application);
         return dealService.calculation(scoringDataDTO);
     }
 

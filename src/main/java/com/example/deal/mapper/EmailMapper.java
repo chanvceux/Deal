@@ -20,7 +20,7 @@ public class EmailMapper {
                 .applicationID(application.getId())
                 .build();
 
-        log.trace("CREATED emailMessageFTO, VALUE: {}", emailMessageDTO);
+        log.trace("CREATED emailMessageDTO, VALUE: {}", emailMessageDTO);
         return emailMessageDTO;
     }
 }

@@ -16,7 +16,7 @@ public class EmploymentMapper {
 
         Employment employment = Employment.builder()
                 .employmentStatus(finishRegistrationRequestDTO.getEmployment().getEmploymentStatus())
-                .employer(finishRegistrationRequestDTO.getEmployment().getEmployerINN())
+                .employer(finishRegistrationRequestDTO.getEmployment().getEmployer())
                 .salary(finishRegistrationRequestDTO.getEmployment().getSalary())
                 .position(finishRegistrationRequestDTO.getEmployment().getPosition())
                 .workExperienceTotal(finishRegistrationRequestDTO.getEmployment().getWorkExperienceTotal())

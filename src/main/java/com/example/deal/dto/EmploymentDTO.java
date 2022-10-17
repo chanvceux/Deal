@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 
 public class EmploymentDTO {
     EmploymentStatus employmentStatus;
-    String employerINN;
+    String employer;
     BigDecimal salary;
     Position position;
     Integer workExperienceTotal;

@@ -57,6 +57,17 @@ public class ApplicationServiceImpl implements ApplicationService {
                 new NoSuchElementException("Cannot find an application with this ID"));
     }
 
+    public ApplicationDTO getApplicationDTO(Long applicationID) {
+        return ApplicationMapper.applicationToApplicationDTO(getApplication(applicationID));
+    }
+    public List<ApplicationDTO> getALlApplications() {
+        List<ApplicationDTO> applicationDTOS = new ArrayList<>();
+        List<Application> application = applicationRepository.findAll();
+        for (Application element: application) {
+            applicationDTOS.add(ApplicationMapper.applicationToApplicationDTO(element));
+        }
+        return applicationDTOS;
+    }
     public Application updateApplicationStatusHistory(Long applicationId, FinishRegistrationRequestDTO finishRegistrationRequestDTO) {
 
         log.debug("GETTING applicationId, VALUE: {}", applicationId);
@@ -76,21 +87,6 @@ public class ApplicationServiceImpl implements ApplicationService {
         return application;
     }
 
-    public ScoringDataDTO scoringDataDTOBuilder(Long applicationId, FinishRegistrationRequestDTO finishRegistrationRequestDTO) {
-
-        log.debug("GETTING applicationId, VALUE: {}", applicationId);
-        log.debug("GETTING finishRegistrationRequestDTO,  VALUE: {}", finishRegistrationRequestDTO);
-
-        Application application = updateApplicationStatusHistory(applicationId, finishRegistrationRequestDTO);
-        log.debug("GETTING Application, UPDATING with updateApplicationStatusHistory, VALUE: {}", applicationId);
-
-        ScoringDataDTO scoringDataDTO =
-                ScoringDataMapper.scoringDataBuilder(applicationId, finishRegistrationRequestDTO, application);
-
-        log.debug("RETURNING ScoringDataDto, VALUE: {}", scoringDataDTO);
-        return scoringDataDTO;
-    }
-
     public void finalUpdateApplication(Long applicationId, CreditDTO creditDTO, List<PaymentSchedule> paymentSchedules) {
 
         log.debug("GETTING applicationId, VALUE: {}", applicationId);
@@ -106,7 +102,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         application.getCredit().setRate(creditDTO.getRate());
         application.getCredit().setPsk(creditDTO.getPsk());
         application.getCredit().getOptionalServices().setIsInsuranceEnabled(creditDTO.getIsInsuranceEnabled());
-        application.getCredit().getOptionalServices().setIsSalaryClient(creditDTO.getIsSalaryClient());
+        application.getCredit().getOptionalServices().setIsSalaryClient(creditDTO.getIsInsuranceEnabled());
         application.getCredit().setPaymentSchedule(paymentSchedules);
         updateApplicationStatusHistory(application, ApplicationStatus.APPROVED);
 

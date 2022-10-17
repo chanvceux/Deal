@@ -11,7 +11,6 @@ public class ScoringDataMapper {
 
     private ScoringDataMapper() {
     }
-
     public static ScoringDataDTO scoringDataBuilder(Long applicationId, FinishRegistrationRequestDTO finishRegistrationRequestDTO, Application application) {
 
         log.debug("GETTING applicationId, VALUE: {}", applicationId);

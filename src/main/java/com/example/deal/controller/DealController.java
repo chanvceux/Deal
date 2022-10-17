@@ -64,31 +64,41 @@ public class DealController {
     }
 
 
-    @PostMapping("/deal/document/{applicationId}/send")
+    @PostMapping("/document/{applicationId}/send")
     @Operation(description = "Creating request to send documents")
     public void documentSend(@PathVariable Long applicationId) throws JsonProcessingException {
         kafkaProducerService.send("send-documents", Theme.SEND_DOCUMENTS, applicationId);
     }
 
-    @PostMapping("/deal/document/{applicationId}/sign")
+    @PostMapping("/document/{applicationId}/sign")
     @Operation(description = "Creating request to send ses-code")
     public void documentSign(@PathVariable Long applicationId) throws JsonProcessingException {
         kafkaProducerService.send("send-ses", Theme.SEND_SES, applicationId);
     }
 
-    @PostMapping("/deal/document/{applicationId}/code")
+    @PostMapping("/document/{applicationId}/code")
     @Operation(description = "Creating request to verify ses-code")
-
     public void documentCode(@PathVariable Long applicationId, @RequestBody Integer sesCode) throws JsonProcessingException {
         Integer generatedSesCode = Integer.valueOf(applicationService.getApplication(applicationId).getSesCode());
         log.trace("GENERATED ses-code, VALUE: {}", generatedSesCode);
         facade.documentCodeFacade(kafkaProducerService, applicationId, sesCode, generatedSesCode);
     }
+
     @PostMapping("/application/{applicationId}")
     @Operation(description = "DossierMC")
     public ResponseEntity<DocumentCreatingDTO> getApplication(@PathVariable Long applicationId) {
         DocumentCreatingDTO documentCreatingDTO = documentService.getInfoForDocument(applicationId);
         return new ResponseEntity<>(documentCreatingDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/admin/application/{applicationId}")
+    public ApplicationDTO getApplicationById(@PathVariable Long applicationId) {
+        return applicationService.getApplicationDTO(applicationId);
+    }
+
+    @GetMapping("/admin/application")
+    public List<ApplicationDTO> getAllApplications() {
+        return applicationService.getALlApplications();
     }
 
 }
