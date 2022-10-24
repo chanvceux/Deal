@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-optional-services
+      author: Valentina Tevyants
+      changes:
+        - createTable:
+            tableName: optional_services
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: is_insurance_enabled
+                  type: boolean
+                  constraints:
+                    nullable: true
+              - column:
+                  name: is_salary_client
+                  type: boolean
+                  constraints:
+                    nullable: true
+

@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-employment
+      author: Valentina Tevyants
+      changes:
+        - createTable:
+            tableName: employment
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: employer
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: employment_status
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: position
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: salary
+                  type: numeric(19,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: work_experience_current
+                  type: integer
+                  constraints:
+                    nullable: true
+              - column:
+                  name: work_experience_total
+                  type: integer
+                  constraints:
+                    nullable: true
+

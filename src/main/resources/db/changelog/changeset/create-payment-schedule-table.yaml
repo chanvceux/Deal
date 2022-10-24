@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-payment-schedule-table
+      author: Valentina Tevyants
+      changes:
+        - createTable:
+            tableName: payment_schedule
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+              - column:
+                  name: number
+                  type: integer
+                  constraints:
+                    nullable: true
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: debt_payment
+                  type: numeric(19,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: interest_payment
+                  type: numeric(19,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: remaining_debt
+                  type: numeric(19,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: total_payment
+                  type: numeric(19,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: payment_schedule_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: payment_schedule_fk
+                    nullable: true
