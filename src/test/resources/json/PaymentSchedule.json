@@ -1,0 +1,34 @@
+[
+  {
+    "number": 1,
+    "date": "2022-11-19",
+    "totalPayment": 0.00,
+    "interestPayment": 0.00,
+    "debtPayment": 0.00,
+    "remainingDebt": 22050.00
+  },
+  {
+    "number": 1,
+    "date": "2022-12-19",
+    "totalPayment": 3804.69,
+    "interestPayment": 220.50,
+    "debtPayment": 3584.19,
+    "remainingDebt": 18465.81
+  },
+  {
+    "number": 1,
+    "date": "2023-01-19",
+    "totalPayment": 7609.38,
+    "interestPayment": 184.66,
+    "debtPayment": 3620.03,
+    "remainingDebt": 14845.78
+  },
+  {
+    "number": 1,
+    "date": "2023-02-19",
+    "totalPayment": 11414.07,
+    "interestPayment": 148.46,
+    "debtPayment": 3656.23,
+    "remainingDebt": 11189.55
+  }
+]

@@ -15,13 +15,13 @@ import java.util.List;
 
 public class CreditDTO {
 
-    BigDecimal amount;
-    Integer term;
-    BigDecimal monthlyPayment;
-    BigDecimal rate;
-    BigDecimal psk;
-    Boolean isInsuranceEnabled;
-    Boolean isSalaryClient;
-    List<PaymentScheduleElementDTO> paymentSchedule;
+    private BigDecimal amount;
+    private Integer term;
+    private BigDecimal monthlyPayment;
+    private BigDecimal rate;
+    private BigDecimal psk;
+    private Boolean isInsuranceEnabled;
+    private Boolean isSalaryClient;
+    private List<PaymentScheduleElementDTO> paymentSchedule;
 
 }

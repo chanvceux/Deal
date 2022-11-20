@@ -11,12 +11,12 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class FinishRegistrationRequestDTO {
-    Gender gender;
-    MaritalStatus maritalStatus;
-    Integer dependentAmount;
-    LocalDate passportIssueDate;
-    String passportIssueBranch;
-    EmploymentDTO employment;
-    String account;
+    private Gender gender;
+    private MaritalStatus maritalStatus;
+    private Integer dependentAmount;
+    private LocalDate passportIssueDate;
+    private String passportIssueBranch;
+    private EmploymentDTO employment;
+    private String account;
 
 }

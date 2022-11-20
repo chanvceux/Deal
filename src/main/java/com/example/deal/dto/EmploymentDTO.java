@@ -15,11 +15,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 
 public class EmploymentDTO {
-    EmploymentStatus employmentStatus;
-    String employer;
-    BigDecimal salary;
-    Position position;
-    Integer workExperienceTotal;
-    Integer workExperienceCurrent;
+    private EmploymentStatus employmentStatus;
+    private String employer;
+    private BigDecimal salary;
+    private Position position;
+    private Integer workExperienceTotal;
+    private Integer workExperienceCurrent;
 
 }

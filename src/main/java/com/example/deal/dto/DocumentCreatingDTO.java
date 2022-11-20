@@ -14,22 +14,22 @@ import java.util.List;
 @NoArgsConstructor
 public class DocumentCreatingDTO {
 
-    String fullName;
-    LocalDate birthdate;
-    String gender;
-    String fullPassportData;
-    String email;
-    String martialStatus;
-    Integer dependentAmount;
-    EmploymentDTO employment;
-    BigDecimal amount;
-    Integer term;
-    BigDecimal monthlyPayment;
-    BigDecimal rate;
-    BigDecimal psk;
-    Boolean isInsuranceEnabled;
-    Boolean isSalaryClient;
-    List<PaymentScheduleElementDTO> paymentScheduleElementList;
-    Integer sesCode;
+    private String fullName;
+    private LocalDate birthdate;
+    private String gender;
+    private String fullPassportData;
+    private String email;
+    private String martialStatus;
+    private Integer dependentAmount;
+    private EmploymentDTO employment;
+    private BigDecimal amount;
+    private Integer term;
+    private BigDecimal monthlyPayment;
+    private BigDecimal rate;
+    private BigDecimal psk;
+    private Boolean isInsuranceEnabled;
+    private Boolean isSalaryClient;
+    private List<PaymentScheduleElementDTO> paymentScheduleElementList;
+    private Integer sesCode;
 
 }

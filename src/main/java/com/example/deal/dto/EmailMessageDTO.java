@@ -9,8 +9,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class EmailMessageDTO {
 
-    String address;
-    Theme theme;
-    Long applicationID;
+    private String address;
+    private Theme theme;
+    private Long applicationID;
 
 }

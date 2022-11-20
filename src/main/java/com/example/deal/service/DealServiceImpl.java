@@ -34,7 +34,9 @@ public class DealServiceImpl implements DealService {
     }
 
     public CreditDTO calculation(ScoringDataDTO scoringDataDTO) {
+        System.out.println(scoringDataDTO);
         CreditDTO creditDTO = conveyorMC.calculation(scoringDataDTO);
+        System.out.println(creditDTO);
         log.debug("RETURNING CreditDTO, VALUE: {}", creditDTO);
         return creditDTO;
     }

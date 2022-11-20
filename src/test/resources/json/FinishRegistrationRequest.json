@@ -1,0 +1,16 @@
+{
+  "gender": "MALE",
+  "maritalStatus": "MARRIED",
+  "dependentAmount": 0,
+  "passportIssueDate": "2022-01-01",
+  "passportIssueBranch": "someplaceinsomewhere",
+  "employment": {
+    "employmentStatus": "BUSINESS_OWNER",
+    "employer": "Someguy",
+    "salary": 100000,
+    "position": "WORKER",
+    "workExperienceTotal": 12,
+    "workExperienceCurrent": 6
+  },
+  "account": "8728191"
+}

@@ -1,0 +1,170 @@
+[{
+  "id": 1,
+  "client":
+  {
+    "id": 1,
+    "lastName": "Ivanov",
+    "firstName": "Ivan",
+    "middleName": "Ivanovich",
+    "birthdate": "1992-01-01",
+    "email": "ivan@gmail.com",
+    "gender": "MALE",
+    "maritalStatus": "MARRIED",
+    "dependentAmount": 0,
+    "passport":
+    {
+      "id": 1,
+      "series": "2828",
+      "number": "256716",
+      "issueDate": "2022-01-01",
+      "issueBranch": "someplaceinsomewhere"
+    },
+    "employment": {
+      "id": 1,
+      "employmentStatus": "BUSINESS_OWNER",
+      "employer": "Someguy",
+      "salary": 100000,
+      "position": "WORKER",
+      "workExperienceTotal": 12,
+      "workExperienceCurrent": 6
+    },
+    "account": "8728191"
+  },
+"credit":
+{
+  "amount": "210000.00",
+  "term": "2",
+  "monthlyPayment": "106445.95",
+  "rate": "11",
+  "psk": "212891.90",
+  "optionalServices": {
+    "id": 1,
+    "isInsuranceEnabled": true,
+    "isSalaryClient": true
+  },
+  "paymentSchedule":
+  [
+    {
+      "number": "0",
+      "date": "2022-08-26",
+      "totalPayment": "0.00",
+      "interestPayment": "0.000",
+      "debtPayment": "0.00",
+      "remainingDebt": "210000.00"
+    },
+    {
+      "number": "1",
+      "date": "2022-09-26",
+      "totalPayment": "106445.95",
+      "interestPayment": "1925.000",
+      "debtPayment": "104520.95",
+      "remainingDebt": "105479.05"
+    },
+    {
+      "number": "2",
+      "date": "2022-10-26",
+      "totalPayment": "212891.90",
+      "interestPayment": "966.891",
+      "debtPayment": "105479.05",
+      "remainingDebt": "0.00"
+    }
+
+  ]
+},
+  "applicationStatus": "PREAPPROVAL",
+  "creationDate": "2022-03-03",
+  "appliedOffer": "someOffer",
+  "signDate": "2022-03-04",
+  "sesCode": "7387",
+  "statusHistory": [{
+    "id": 1,
+    "status": "CALCULATED",
+    "time": ""
+  }]
+},
+
+  {
+    "id": 1,
+    "client":
+    {
+      "id": 1,
+      "lastName": "Ivanov",
+      "firstName": "Ivan",
+      "middleName": "Ivanovich",
+      "birthdate": "1992-01-01",
+      "email": "ivan@gmail.com",
+      "gender": "MALE",
+      "maritalStatus": "MARRIED",
+      "dependentAmount": 0,
+      "passport":
+      {
+        "id": 1,
+        "series": "2828",
+        "number": "256716",
+        "issueDate": "2022-01-01",
+        "issueBranch": "someplaceinsomewhere"
+      },
+      "employment": {
+        "id": 1,
+        "employmentStatus": "BUSINESS_OWNER",
+        "employer": "Someguy",
+        "salary": 100000,
+        "position": "WORKER",
+        "workExperienceTotal": 12,
+        "workExperienceCurrent": 6
+      },
+      "account": "8728191"
+    },
+    "credit":
+    {
+      "amount": "210000.00",
+      "term": "2",
+      "monthlyPayment": "106445.95",
+      "rate": "11",
+      "psk": "212891.90",
+      "optionalServices": {
+        "id": 1,
+        "isInsuranceEnabled": true,
+        "isSalaryClient": true
+      },
+      "paymentSchedule":
+      [
+        {
+          "number": "0",
+          "date": "2022-08-26",
+          "totalPayment": "0.00",
+          "interestPayment": "0.000",
+          "debtPayment": "0.00",
+          "remainingDebt": "210000.00"
+        },
+        {
+          "number": "1",
+          "date": "2022-09-26",
+          "totalPayment": "106445.95",
+          "interestPayment": "1925.000",
+          "debtPayment": "104520.95",
+          "remainingDebt": "105479.05"
+        },
+        {
+          "number": "2",
+          "date": "2022-10-26",
+          "totalPayment": "212891.90",
+          "interestPayment": "966.891",
+          "debtPayment": "105479.05",
+          "remainingDebt": "0.00"
+        }
+
+      ]
+    },
+    "applicationStatus": "PREAPPROVAL",
+    "creationDate": "2022-03-03",
+    "appliedOffer": "someOffer",
+    "signDate": "2022-03-04",
+    "sesCode": "7387",
+    "statusHistory": [{
+      "id": 1,
+      "status": "CALCULATED",
+      "time": ""
+    }]
+  }
+]
