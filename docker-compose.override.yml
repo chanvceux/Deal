@@ -9,5 +9,5 @@ services:
       - POSTGRES_DB=CreditConveyor
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
-      - "5432:5433"
+      - "5433:5433"
     restart: always
