@@ -17,4 +17,4 @@ server:
   port: 8081
 
 conveyor:
-  url: http://localhost:8080
+  url: http://${CONVEYOR_URL:localhost}:8080/
